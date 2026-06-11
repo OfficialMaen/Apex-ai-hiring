@@ -15,7 +15,6 @@ applyForm.addEventListener("submit", async function(event) {
     };
 
     try {
-        // Fetch to /apply (Vercel handles the routing)
         const response = await fetch('/apply', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -31,7 +30,7 @@ applyForm.addEventListener("submit", async function(event) {
             alert("❌ Error: " + (result.error || "Failed to submit"));
         }
     } catch (err) {
-        alert("❌ Server Error. Please try again later.");
+        alert("❌ Server connection error.");
     } finally {
         submitBtn.innerText = "Submit Application";
         submitBtn.disabled = false;
