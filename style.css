@@ -9,7 +9,6 @@ body{
     background:#050505;
     color:white;
     min-height:100vh;
-    overflow-x:hidden;
 }
 
 .background{
@@ -69,12 +68,9 @@ label{
     margin-top:15px;
 }
 
-input,
-select,
-textarea{
+input, select, textarea{
     width:100%;
     padding:15px;
-    border:none;
     border-radius:12px;
     background:#1a1a1a;
     color:white;
@@ -87,9 +83,7 @@ textarea{
     resize:vertical;
 }
 
-input:focus,
-select:focus,
-textarea:focus{
+input:focus, select:focus, textarea:focus{
     border-color:#8b5cf6;
 }
 
@@ -111,7 +105,7 @@ button:hover{
     box-shadow:0 0 20px rgba(139,92,246,.6);
 }
 
-button:disabled {
-    background: #444;
-    cursor: not-allowed;
+button:disabled{
+    background:#444;
+    cursor:not-allowed;
 }
