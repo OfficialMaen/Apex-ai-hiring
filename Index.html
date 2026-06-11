@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex AI Hiring</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background"></div>
+    <header>
+        <img src="Apexailogo.png" alt="Apex AI Logo" class="logo">
+        <h1>Apex AI</h1>
+        <p>Join our team and help build the future of AI-powered creation.</p>
+    </header>
+
+    <section class="application-card">
+        <h2>Apply Now</h2>
+        <form id="applyForm">
+            <label>Full Name</label>
+            <input type="text" id="userName" placeholder="Enter your name" required>
+
+            <label>Email Address</label>
+            <input type="email" id="userEmail" placeholder="Enter your email" required>
+
+            <label>Position</label>
+            <select id="userPosition" required>
+                <option value="">Select a position</option>
+                <option value="Ideas">Ideas</option>
+                <option value="Programmer">Programmer</option>
+                <option value="Art">Art</option>
+            </select>
+
+            <label>Experience</label>
+            <textarea id="userExperience" placeholder="Tell us about your experience..." required></textarea>
+
+            <button type="submit" id="submitBtn">Submit Application</button>
+        </form>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
