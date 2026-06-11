@@ -4,11 +4,9 @@ const submitBtn = document.getElementById("submitBtn");
 applyForm.addEventListener("submit", async function(event) {
     event.preventDefault();
 
-    // Visual feedback
     submitBtn.innerText = "Sending...";
     submitBtn.disabled = true;
 
-    // Collect data
     const applicationData = {
         name: document.getElementById("userName").value,
         email: document.getElementById("userEmail").value,
@@ -17,7 +15,7 @@ applyForm.addEventListener("submit", async function(event) {
     };
 
     try {
-        // Send to Node.js server
+        // Fetch to /apply (Vercel handles the routing)
         const response = await fetch('/apply', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -30,11 +28,10 @@ applyForm.addEventListener("submit", async function(event) {
             alert("✅ Application Submitted Successfully!");
             applyForm.reset();
         } else {
-            alert("❌ Error: " + (result.error || "Submission failed"));
+            alert("❌ Error: " + (result.error || "Failed to submit"));
         }
     } catch (err) {
-        console.error(err);
-        alert("❌ Server not responding. Did you run 'node server.js'?");
+        alert("❌ Server Error. Please try again later.");
     } finally {
         submitBtn.innerText = "Submit Application";
         submitBtn.disabled = false;
