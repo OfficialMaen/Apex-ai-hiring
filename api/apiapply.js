@@ -1,11 +1,15 @@
 const { createClient } = require('@supabase/supabase-js');
 const { Resend } = require('resend');
 
+// These are pulled from your Vercel Dashboard Settings
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 module.exports = async (req, res) => {
-    if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+    // Only allow POST requests
+    if (req.method !== 'POST') {
+        return res.status(405).json({ error: 'Method not allowed' });
+    }
 
     const { name, email, position, experience } = req.body;
 
@@ -15,18 +19,19 @@ module.exports = async (req, res) => {
             .from('applications')
             .insert([{ name, email, position, experience }]);
 
-        if (dbError) throw new Error("Supabase: " + dbError.message);
+        if (dbError) throw new Error("Database Error: " + dbError.message);
 
-        // 2. Send Email
+        // 2. Send Email Notification
         await resend.emails.send({
             from: 'onboarding@resend.dev',
-            to: 'maenthecopra@gmail.com', // <--- IMPORTANT: PUT YOUR EMAIL HERE
+            to: 'maenthecopra@gmail.com', // <--- PUT YOUR GMAIL HERE
             subject: `New Application: ${name}`,
             html: `<p><b>Name:</b> ${name}</p><p><b>Pos:</b> ${position}</p><p><b>Exp:</b> ${experience}</p>`
         });
 
         return res.status(200).json({ message: "Success" });
     } catch (error) {
+        console.error(error);
         return res.status(500).json({ error: error.message });
     }
 };
