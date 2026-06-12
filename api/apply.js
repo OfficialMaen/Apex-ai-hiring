@@ -17,12 +17,22 @@ module.exports = async (req, res) => {
 
         if (dbError) throw new Error("Database: " + dbError.message);
 
-        // 2. Send Email Notification
+        // 2. Send Email Notification (Now including the Email Address!)
         await resend.emails.send({
             from: 'onboarding@resend.dev',
-            to: 'maenthecopra@gmail.com', // <--- PUT YOUR GMAIL HERE
-            subject: `New Application: ${name}`,
-            html: `<p><b>Name:</b> ${name}</p><p><b>Pos:</b> ${position}</p><p><b>Exp:</b> ${experience}</p>`
+            to: 'maenthecopra@GMAIL.COM', // <--- Make sure your Gmail is here
+            subject: `🚀 New Application: ${name}`,
+            html: `
+                <div style="font-family: sans-serif; line-height: 1.5;">
+                    <h2>New Team Application</h2>
+                    <p><b>Name:</b> ${name}</p>
+                    <p><b>Email Address:</b> ${email}</p> 
+                    <p><b>Position:</b> ${position}</p>
+                    <hr>
+                    <p><b>Experience:</b></p>
+                    <p>${experience}</p>
+                </div>
+            `
         });
 
         return res.status(200).json({ message: "Success" });
