@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
         // 2. Send Email Notification
         await resend.emails.send({
             from: 'onboarding@resend.dev',
-            to: 'maenthecopra@gmail.com', // <--- IMPORTANT: PUT YOUR ACTUAL GMAIL HERE
+            to: 'maenthecopra@gmail.com', // <--- PUT YOUR GMAIL HERE
             subject: `New Application: ${name}`,
             html: `<p><b>Name:</b> ${name}</p><p><b>Pos:</b> ${position}</p><p><b>Exp:</b> ${experience}</p>`
         });
