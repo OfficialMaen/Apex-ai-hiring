@@ -4,7 +4,7 @@ const submitBtn = document.getElementById("submitBtn");
 applyForm.addEventListener("submit", async function(event) {
     event.preventDefault();
 
-    submitBtn.innerText = "Sending...";
+    submitBtn.innerText = "Processing...";
     submitBtn.disabled = true;
 
     const applicationData = {
@@ -24,13 +24,14 @@ applyForm.addEventListener("submit", async function(event) {
         const result = await response.json();
 
         if (response.ok) {
-            alert("✅ Application Submitted Successfully!");
+            alert("✅ SUCCESS: Your application was sent!");
             applyForm.reset();
         } else {
-            alert("❌ Error: " + (result.error || "Failed to submit"));
+            // This will tell you if it's a Database error or an Email error
+            alert("❌ SERVER ERROR: " + result.error);
         }
     } catch (err) {
-        alert("❌ Server connection error.");
+        alert("❌ CONNECTION ERROR: Could not reach the server. Check Vercel logs.");
     } finally {
         submitBtn.innerText = "Submit Application";
         submitBtn.disabled = false;
