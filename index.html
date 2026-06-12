@@ -25,7 +25,6 @@
         <h1>Apex AI</h1>
         <p>Join our team and help build the future.</p>
     </header>
-
     <section class="application-card">
         <form id="applyForm">
             <label>Full Name</label>
@@ -44,38 +43,33 @@
             <button type="submit" id="submitBtn">Submit Application</button>
         </form>
     </section>
-
     <script>
-        document.getElementById("applyForm").addEventListener("submit", async function(event) {
-            event.preventDefault();
+        document.getElementById("applyForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
             const btn = document.getElementById("submitBtn");
             btn.innerText = "Sending...";
             btn.disabled = true;
-
-            const applicationData = {
+            const data = {
                 name: document.getElementById("userName").value,
                 email: document.getElementById("userEmail").value,
                 position: document.getElementById("userPosition").value,
                 experience: document.getElementById("userExperience").value
             };
-
             try {
-                const response = await fetch('/api/apply', {
+                const res = await fetch('/api/apply', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(applicationData)
+                    body: JSON.stringify(data)
                 });
-
-                const result = await response.json();
-
-                if (response.ok) {
-                    alert("✅ SUCCESS: Your application was sent!");
+                const result = await res.json();
+                if (res.ok) {
+                    alert("✅ Success!");
                     document.getElementById("applyForm").reset();
                 } else {
-                    alert("❌ SERVER ERROR: " + result.error);
+                    alert("❌ Error: " + result.error);
                 }
             } catch (err) {
-                alert("❌ CONNECTION ERROR: Check Vercel logs.");
+                alert("❌ Connection Error. Check Vercel Logs.");
             } finally {
                 btn.innerText = "Submit Application";
                 btn.disabled = false;
