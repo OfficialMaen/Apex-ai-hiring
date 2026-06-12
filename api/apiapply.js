@@ -2,39 +2,39 @@ const { createClient } = require('@supabase/supabase-js');
 const { Resend } = require('resend');
 
 module.exports = async (req, res) => {
-    // 1. Check for keys immediately
-    if (!process.env.SUPABASE_URL || !process.env.SUPABASE_KEY || !process.env.RESEND_API_KEY) {
-        return res.status(500).json({ error: "API Keys are missing in Vercel Settings!" });
-    }
+    // Enable CORS
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-    if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method not allowed' });
-    }
+    if (req.method === 'OPTIONS') return res.status(200).end();
+    if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
     const { name, email, position, experience } = req.body;
 
     try {
+        // Initialize within the function to catch environment errors
         const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
         const resend = new Resend(process.env.RESEND_API_KEY);
 
-        // 2. Save to Supabase (Ensure table is named 'applications')
+        // 1. Save to Supabase
         const { error: dbError } = await supabase
             .from('applications')
             .insert([{ name, email, position, experience }]);
 
         if (dbError) throw new Error("Database Error: " + dbError.message);
 
-        // 3. Send Email Notification
+        // 2. Send Email
         await resend.emails.send({
             from: 'onboarding@resend.dev',
-            to: 'maenthecopra@gmail.com', // <--- MAKE SURE THIS IS YOUR EMAIL
+            to: 'maenthecopra@gmail.com', // <--- IMPORTANT: Change to your email
             subject: `New Application: ${name}`,
             html: `<p><b>Name:</b> ${name}</p><p><b>Pos:</b> ${position}</p><p><b>Exp:</b> ${experience}</p>`
         });
 
         return res.status(200).json({ message: "Success" });
     } catch (error) {
-        console.error("Critical Error:", error.message);
+        console.error(error);
         return res.status(500).json({ error: error.message });
     }
 };
