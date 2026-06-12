@@ -1,18 +1,9 @@
 {
   "version": 2,
-  "functions": {
-    "api/apply.js": {
-      "runtime": "@vercel/node@20"
-    }
-  },
-  "routes": [
+  "rewrites": [
     {
       "src": "/api/apply",
-      "dest": "api/apply.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "dest": "/api/apply.js"
     }
   ]
 }
