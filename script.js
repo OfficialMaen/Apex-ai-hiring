@@ -3,8 +3,7 @@ const submitBtn = document.getElementById("submitBtn");
 
 applyForm.addEventListener("submit", async function(event) {
     event.preventDefault();
-
-    submitBtn.innerText = "Processing...";
+    submitBtn.innerText = "Sending...";
     submitBtn.disabled = true;
 
     const applicationData = {
@@ -15,7 +14,8 @@ applyForm.addEventListener("submit", async function(event) {
     };
 
     try {
-        const response = await fetch('/apply', {
+        // Updated URL to point to the Vercel API folder
+        const response = await fetch('/api/apply', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(applicationData)
@@ -24,14 +24,13 @@ applyForm.addEventListener("submit", async function(event) {
         const result = await response.json();
 
         if (response.ok) {
-            alert("✅ SUCCESS: Your application was sent!");
+            alert("✅ SUCCESS: Application Sent!");
             applyForm.reset();
         } else {
-            // This will tell you if it's a Database error or an Email error
             alert("❌ SERVER ERROR: " + result.error);
         }
     } catch (err) {
-        alert("❌ CONNECTION ERROR: Could not reach the server. Check Vercel logs.");
+        alert("❌ CONNECTION ERROR: Check your internet or Vercel logs.");
     } finally {
         submitBtn.innerText = "Submit Application";
         submitBtn.disabled = false;
