@@ -17,10 +17,10 @@ module.exports = async (req, res) => {
 
         if (dbError) throw new Error("Database: " + dbError.message);
 
-        // 2. Send Email Notification (Now including the Email Address!)
+        // 2. Send Email Notification
         await resend.emails.send({
             from: 'onboarding@resend.dev',
-            to: 'maenthecopra@gmail.com', // <--- Make sure your Gmail is here
+            to: 'maenthecopra@gmail.com', 
             subject: `🚀 New Application: ${name}`,
             html: `
                 <div style="font-family: sans-serif; line-height: 1.5;">
