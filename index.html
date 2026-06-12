@@ -4,12 +4,144 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apex AI Hiring</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* CSS DIRECTLY IN HTML TO PREVENT 404 ERRORS */
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body{
+            background:#050505;
+            color:white;
+            min-height:100vh;
+            overflow-x:hidden;
+        }
+
+        .background{
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background: 
+                radial-gradient(circle at top left,#8b5cf650,transparent 35%),
+                radial-gradient(circle at bottom right,#6d28d950,transparent 35%);
+            z-index:-1;
+        }
+
+        header{
+            text-align:center;
+            padding:60px 20px 20px;
+        }
+
+        .logo{
+            width:150px;
+            margin-bottom:20px;
+            filter: drop-shadow(0 0 10px rgba(139,92,246,0.5));
+        }
+
+        h1{
+            font-size:55px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom:10px;
+            background: linear-gradient(to right, #fff, #b794ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p{
+            color:#a1a1a1;
+            font-size:18px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .application-card{
+            width:90%;
+            max-width:650px;
+            margin:40px auto;
+            padding:40px;
+            background:rgba(15,15,15,0.8);
+            border:1px solid rgba(139,92,246,0.2);
+            border-radius:24px;
+            backdrop-filter:blur(12px);
+            box-shadow:0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(139,92,246,0.1);
+        }
+
+        .application-card h2{
+            text-align:center;
+            margin-bottom:30px;
+            font-size:28px;
+            color:#b794ff;
+        }
+
+        label{
+            display:block;
+            margin-bottom:8px;
+            margin-top:20px;
+            font-size: 14px;
+            color: #ccc;
+            font-weight: 500;
+        }
+
+        input, select, textarea{
+            width:100%;
+            padding:14px;
+            border-radius:12px;
+            background:#111;
+            color:white;
+            outline:none;
+            border:1px solid #222;
+            transition: 0.3s;
+        }
+
+        textarea{
+            min-height:110px;
+            resize:vertical;
+        }
+
+        input:focus, select:focus, textarea:focus{
+            border-color:#8b5cf6;
+            background: #161616;
+            box-shadow: 0 0 0 4px rgba(139,92,246,0.1);
+        }
+
+        button{
+            width:100%;
+            margin-top:30px;
+            padding:16px;
+            border:none;
+            border-radius:12px;
+            background:linear-gradient(135deg,#8b5cf6,#6d28d9);
+            color:white;
+            font-size:16px;
+            font-weight: 600;
+            cursor:pointer;
+            transition:.3s;
+        }
+
+        button:hover{
+            transform:translateY(-2px);
+            box-shadow:0 10px 20px rgba(139,92,246,0.4);
+            filter: brightness(1.1);
+        }
+
+        button:disabled{
+            background:#333;
+            cursor:not-allowed;
+            transform: none;
+        }
+    </style>
 </head>
 <body>
     <div class="background"></div>
     <header>
-        <img src="Apexailogo.png" alt="Apex AI Logo" class="logo">
+        <!-- Ensure filename is exactly Apexailogo.png on GitHub -->
+        <img src="Apexailogo.png" alt="Apex AI" class="logo">
         <h1>Apex AI</h1>
         <p>Join our team and help build the future of AI-powered creation.</p>
     </header>
