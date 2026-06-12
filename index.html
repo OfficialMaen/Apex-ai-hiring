@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apex AI Hiring</title>
     <style>
-        /* Modern CSS directly in the file */
         *{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
         body{background:#050505;color:white;min-height:100vh;display:flex;flex-direction:column;align-items:center;}
         .background{position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at top left,#8b5cf650,transparent 35%),radial-gradient(circle at bottom right,#6d28d950,transparent 35%);z-index:-1;}
         header{text-align:center;padding:60px 20px;}
-        .logo{width:150px;margin-bottom:20px;}
+        .logo{width:150px;margin-bottom:20px;filter:drop-shadow(0 0 10px rgba(139,92,246,0.3));}
         h1{font-size:55px;font-weight:800;background:linear-gradient(to right,#fff,#b794ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-        .application-card{width:90%;max-width:600px;background:rgba(15,15,15,0.8);padding:40px;border-radius:24px;border:1px solid rgba(139,92,246,0.2);backdrop-filter:blur(12px);}
+        .application-card{width:90%;max-width:600px;background:rgba(15,15,15,0.8);padding:40px;border-radius:24px;border:1px solid rgba(139,92,246,0.2);backdrop-filter:blur(12px);box-shadow:0 20px 50px rgba(0,0,0,0.5);}
         label{display:block;margin:20px 0 8px;color:#ccc;font-size:14px;}
         input,select,textarea{width:100%;padding:14px;border-radius:12px;background:#111;color:white;border:1px solid #222;outline:none;}
         button{width:100%;margin-top:30px;padding:16px;border:none;border-radius:12px;background:linear-gradient(135deg,#8b5cf6,#6d28d9);color:white;font-weight:bold;cursor:pointer;transition:0.3s;}
@@ -23,6 +22,7 @@
 <body>
     <div class="background"></div>
     <header>
+        <!-- Ensure file is named exactly Apexailogo.png in your GitHub root -->
         <img src="Apexailogo.png" alt="Apex AI" class="logo">
         <h1>Apex AI</h1>
         <p>Join our team and help build the future.</p>
@@ -48,7 +48,6 @@
     </section>
 
     <script>
-        // JavaScript directly in the file
         const applyForm = document.getElementById("applyForm");
         const submitBtn = document.getElementById("submitBtn");
 
@@ -65,7 +64,7 @@
             };
 
             try {
-                // Calls the Vercel Function in the /api folder
+                // IMPORTANT: Fetching to /api/apply
                 const response = await fetch('/api/apply', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -75,13 +74,13 @@
                 const result = await response.json();
 
                 if (response.ok) {
-                    alert("✅ SUCCESS: Application Sent!");
+                    alert("✅ SUCCESS: Your application was sent!");
                     applyForm.reset();
                 } else {
-                    alert("❌ SERVER ERROR: " + result.error);
+                    alert("❌ SERVER ERROR: " + (result.error || "Unknown error"));
                 }
             } catch (err) {
-                alert("❌ CONNECTION ERROR: Check your Vercel logs for API errors.");
+                alert("❌ CONNECTION ERROR: The API failed. Check Vercel Environment Variables.");
             } finally {
                 submitBtn.innerText = "Submit Application";
                 submitBtn.disabled = false;
