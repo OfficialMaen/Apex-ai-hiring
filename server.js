@@ -34,7 +34,7 @@ app.post('/apply', async (req, res) => {
         try {
             await resend.emails.send({
                 from: 'onboarding@resend.dev',
-                to: 'YOUR_REAL_GMAIL@gmail.com', // <--- CHECK THIS
+                to: 'maenthecopra@gmail.com', // <--- CHECK THIS
                 subject: `New Application from ${name}`,
                 html: `<p>New application received for ${position}</p>`
             });
